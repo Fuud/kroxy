@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>%date{UTC} %r ms [%thread] %-5level %logger - %msg%n</pattern>
+            </PatternLayout>
+        </Console>
+        <RollingFile name="File" immediateFlush="false"
+                     fileName="./logs/xman-test.log"
+                     filePattern="./logs/xman-test-%i.gz">
+            <PatternLayout>
+                <pattern>%date{UTC} %r ms [%thread] %-5level %logger{40} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="trace">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
