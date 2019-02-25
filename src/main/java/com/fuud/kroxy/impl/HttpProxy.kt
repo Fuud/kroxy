@@ -34,6 +34,7 @@ class HttpProxy(val port:Int, socketFactory: SocketFactory) {
 
                         var targetHost: String? = null;
                         if (line.startsWith("CONNECT ")) {
+                            targetHost = line.substringAfter("CONNECT ").substringBeforeLast(" ")
                             while (true) {
                                 val headerLine = input.readASCIILine()
                                         ?: throw IllegalStateException("Header was expected but got null")
@@ -45,7 +46,7 @@ class HttpProxy(val port:Int, socketFactory: SocketFactory) {
                                 }
                             }
 
-                            if (targetHost != null) {
+                            if (targetHost.isNullOrBlank()) {
                                 val hostAndPort = HostAndPort.fromString(targetHost)
                                 val targetSocket = socketFactory.connect(hostAndPort)
 
