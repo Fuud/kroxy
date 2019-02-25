@@ -18,7 +18,7 @@ class TcpReverseProxyServer(port: Int): SocketFactory {
     private val channel = Channel<Socket>()
     init {
         launch {
-            val server = aSocket(ActorSelectorManager(ioCoroutineDispatcher)).tcp().bind(InetSocketAddress("127.0.0.1", port))
+            val server = aSocket(ActorSelectorManager(ioCoroutineDispatcher)).tcp().bind(port = port)
             while (true) {
                 val socket = server.accept()
                 channel.send(socket)
