@@ -46,7 +46,7 @@ class HttpProxy(val port:Int, socketFactory: SocketFactory) {
                                 }
                             }
 
-                            if (targetHost.isNullOrBlank()) {
+                            if (!targetHost.isNullOrBlank()) {
                                 val hostAndPort = HostAndPort.fromString(targetHost)
                                 val targetSocket = socketFactory.connect(hostAndPort)
 
